@@ -40,6 +40,7 @@ import org.ossreviewtoolkit.model.VcsInfo
 import org.ossreviewtoolkit.model.config.AnalyzerConfiguration
 import org.ossreviewtoolkit.model.config.RepositoryConfiguration
 import org.ossreviewtoolkit.model.readValue
+import org.ossreviewtoolkit.spdx.VCS_DIRECTORIES
 import org.ossreviewtoolkit.utils.NamedThreadFactory
 import org.ossreviewtoolkit.utils.ORT_REPO_CONFIG_FILENAME
 import org.ossreviewtoolkit.utils.log
@@ -87,11 +88,14 @@ class Analyzer(private val config: AnalyzerConfiguration) {
             Pair(manager, mappedFiles).takeIf { mappedFiles.isNotEmpty() }
         }.toMap(mutableMapOf())
 
-        val hasDefinitionFileInRootDirectory = managedFiles.values.flatten().any {
-            it.parentFile.absoluteFile == absoluteProjectPath
+        // Check whether there are unmanaged files (either because of an unsupported, deactivated or non-present package
+        // manager) which we need to attach to a "fake" unmanaged project.
+        val managedDirectories = managedFiles.values.flatten().mapNotNull { it.parentFile }
+        val unmanagedFiles = absoluteProjectPath.listFiles().filterNot {
+            it in managedDirectories || it.name in VCS_DIRECTORIES
         }
 
-        if (factoryFiles.isEmpty() || !hasDefinitionFileInRootDirectory) {
+        if (unmanagedFiles.isNotEmpty()) {
             Unmanaged.Factory().create(absoluteProjectPath, config, repositoryConfiguration).let {
                 managedFiles[it] = listOf(absoluteProjectPath)
             }
