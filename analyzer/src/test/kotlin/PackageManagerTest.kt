@@ -33,7 +33,7 @@ import org.ossreviewtoolkit.model.VcsInfo
 import org.ossreviewtoolkit.model.VcsType
 
 class PackageManagerTest : WordSpec({
-    val projectDir = File("src/funTest/assets/projects/synthetic/all-managers").absoluteFile
+    val projectDir = File("src/funTest/assets/projects/synthetic").absoluteFile
 
     "findManagedFiles" should {
         "find all managed files" {
