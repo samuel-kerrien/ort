@@ -45,7 +45,7 @@ class OrtConfigurationTest : WordSpec({
             val refConfig = File("src/test/assets/reference.conf")
             val ortConfig = OrtConfiguration.load(configFile = refConfig)
 
-            ortConfig.analyzer shouldNotBeNull {
+            with(ortConfig.analyzer) {
                 ignoreToolVersions shouldBe true
                 allowDynamicVersions shouldBe true
 
@@ -59,7 +59,7 @@ class OrtConfigurationTest : WordSpec({
                 }
             }
 
-            ortConfig.scanner shouldNotBeNull {
+            with(ortConfig.scanner) {
                 archive shouldNotBeNull {
                     storage.httpFileStorage should beNull()
                     storage.localFileStorage shouldNotBeNull {
@@ -105,7 +105,7 @@ class OrtConfigurationTest : WordSpec({
                 ignorePatterns shouldContainExactly listOf("**/META-INF/DEPENDENCIES")
             }
 
-            ortConfig.licenseFilePatterns shouldNotBeNull {
+            with(ortConfig.licenseFilePatterns) {
                 licenseFilenames shouldContainExactly listOf("license*")
                 patentFilenames shouldContainExactly listOf("patents")
                 rootLicenseFilenames shouldContainExactly listOf("readme*")
@@ -142,7 +142,7 @@ class OrtConfigurationTest : WordSpec({
                     configFile = configFile
                 )
 
-                config.scanner?.storages shouldNotBeNull {
+                config.scanner.storages shouldNotBeNull {
                     val postgresStorage = this["postgresStorage"]
                     postgresStorage.shouldBeInstanceOf<PostgresStorageConfiguration>()
                     postgresStorage.username shouldBe "username"
@@ -185,7 +185,7 @@ class OrtConfigurationTest : WordSpec({
 
             val config = OrtConfiguration.load(configFile = file, args = args)
 
-            config.scanner should beNull()
+            config.scanner shouldBe ScannerConfiguration()
         }
 
         "support references to environment variables" {
@@ -212,7 +212,7 @@ class OrtConfigurationTest : WordSpec({
             withEnvironment(env) {
                 val config = OrtConfiguration.load(configFile = configFile)
 
-                config.scanner?.storages shouldNotBeNull {
+                config.scanner.storages shouldNotBeNull {
                     val postgresStorage = this["postgresStorage"]
                     postgresStorage.shouldBeInstanceOf<PostgresStorageConfiguration>()
                     postgresStorage.username shouldBe user
@@ -236,7 +236,7 @@ class OrtConfigurationTest : WordSpec({
             withEnvironment(env) {
                 val config = OrtConfiguration.load(configFile = File("dummyPath"))
 
-                config.scanner?.storages shouldNotBeNull {
+                config.scanner.storages shouldNotBeNull {
                     val postgresStorage = this["postgresStorage"]
                     postgresStorage.shouldBeInstanceOf<PostgresStorageConfiguration>()
                     postgresStorage.username shouldBe user

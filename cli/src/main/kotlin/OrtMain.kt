@@ -149,7 +149,7 @@ class OrtMain : CliktCommand(name = ORT_NAME, epilog = "* denotes required optio
         // Make options available to subcommands and apply static configuration.
         val ortConfiguration = OrtConfiguration.load(configArguments, configFile)
         currentContext.findOrSetObject { GlobalOptions(ortConfiguration, forceOverwrite) }
-        applyStaticConfiguration(ortConfiguration)
+        LicenseFilenamePatterns.configure(ortConfiguration.licenseFilePatterns)
 
         println(getVersionHeader(env.ortVersion))
     }
@@ -184,10 +184,6 @@ class OrtMain : CliktCommand(name = ORT_NAME, epilog = "* denotes required optio
 
         return header.joinToString("\n", postfix = "\n")
     }
-}
-
-private fun applyStaticConfiguration(ortConfiguration: OrtConfiguration) {
-    ortConfiguration.licenseFilePatterns?.let { LicenseFilenamePatterns.configure(it) }
 }
 
 /**

@@ -64,8 +64,7 @@ internal class EvaluatedModelMapper(private val input: ReporterInput) {
     private val ruleViolationResolutions = mutableListOf<RuleViolationResolution>()
 
     private val curationsMatcher = FindingCurationMatcher()
-    private val findingsMatcher =
-        FindingsMatcher(RootLicenseMatcher(input.ortConfig.licenseFilePatterns ?: LicenseFilenamePatterns.DEFAULT))
+    private val findingsMatcher = FindingsMatcher(RootLicenseMatcher(input.ortConfig.licenseFilePatterns))
 
     private data class PackageExcludeInfo(
         var id: Identifier,

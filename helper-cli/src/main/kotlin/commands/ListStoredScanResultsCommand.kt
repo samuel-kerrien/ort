@@ -65,7 +65,7 @@ internal class ListStoredScanResultsCommand : CliktCommand(
 
     override fun run() {
         val config = OrtConfiguration.load(configArguments, configFile)
-        ScanResultsStorage.configure(config.scanner ?: ScannerConfiguration())
+        ScanResultsStorage.configure(config.scanner)
 
         println("Searching for scan results of '${packageId.toCoordinates()}' in ${ScanResultsStorage.storage.name}.")
 

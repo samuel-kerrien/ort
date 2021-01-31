@@ -119,7 +119,7 @@ class AdvisorCommand : CliktCommand(name = "advise", help = "Run vulnerability d
         }
 
         val config = globalOptionsForSubcommands.config
-        val advisorConfig = config.advisor?.get(advisorFactory.advisorName.toLowerCase())
+        val advisorConfig = config.advisor[advisorFactory.advisorName.toLowerCase()]
         val advisor = configureAdvisor(advisorConfig)
 
         val ortResult = advisor.retrieveVulnerabilityInformation(input, skipExcluded).mergeLabels(labels)

@@ -75,8 +75,8 @@ data class ReporterInput(
     val licenseInfoResolver: LicenseInfoResolver = LicenseInfoResolver(
         provider = DefaultLicenseInfoProvider(ortResult, packageConfigurationProvider),
         copyrightGarbage = copyrightGarbage,
-        archiver = ortConfig.scanner?.archive.createFileArchiver(),
-        licenseFilenamePatterns = ortConfig.licenseFilePatterns ?: LicenseFilenamePatterns.DEFAULT
+        archiver = ortConfig.scanner.archive.createFileArchiver(),
+        licenseFilenamePatterns = ortConfig.licenseFilePatterns
     ),
 
     /**
