@@ -2,19 +2,23 @@
 
 &nbsp;
 
-| Linux (OpenJDK 11)             | Windows (Oracle JDK 11)         | JitPack (OpenJDK 11)            |
-| :----------------------------- | :------------------------------ | :------------------------------ |
-| [![Linux build status][1]][2]  | [![Windows build status][3]][4] | [![JitPack build status][5]][6] |
-| [![Linux code coverage][7]][8] |                                 |                                 |
+|                | Linux (OpenJDK 11)            | Windows (OpenJDK 11)            |
+| :------------- | :---------------------------- | :------------------------------ |
+| Build + Test   | [![Linux build status][1]][2] | [![Windows build status][3]][4] |
+| Analyzer Tests | [![Linux build status][1]][2] | [![Windows build status][3]][4] |
+
+| Code Coverage            | Static Analysis               | Docker build                  | JitPack (OpenJDK 11)            |
+| :----------------------- | :---------------------------- | :---------------------------- | :------------------------------ |
+| [![Code coverage][7]][8] | [![Linux build status][1]][2] | [![Linux build status][1]][2] | [![JitPack build status][5]][6] |
 
 | License status           | Best practices   | Code quality     | TODOs              | Interact with us!              |
 | :----------------------- | :----------------| :----------------| :----------------- | :----------------------------- |
 | [![REUSE status][9]][10] | [![CII][17]][18] | [![LGTM][11]][12]| [![TODOs][13]][14] | [![ort-talk][15]][16]          |
 
-[1]: https://travis-ci.com/oss-review-toolkit/ort.svg?branch=master
-[2]: https://travis-ci.com/oss-review-toolkit/ort
-[3]: https://ci.appveyor.com/api/projects/status/8oh5ld40c8h19jr5/branch/master?svg=true
-[4]: https://ci.appveyor.com/project/oss-review-toolkit/ort/branch/master
+[1]: https://dev.azure.com/oss-review-toolkit/ort/_apis/build/status/oss-review-toolkit.ort?branchName=master&jobName=LinuxTest
+[2]: https://dev.azure.com/oss-review-toolkit/ort/_build/latest?definitionId=2&branchName=master
+[3]: https://dev.azure.com/oss-review-toolkit/ort/_apis/build/status/oss-review-toolkit.ort?branchName=master&jobName=WindowsTest
+[4]: https://dev.azure.com/oss-review-toolkit/ort/_build/latest?definitionId=2&branchName=master
 [5]: https://jitpack.io/v/oss-review-toolkit/ort.svg
 [6]: https://jitpack.io/#oss-review-toolkit/ort
 [7]: https://codecov.io/gh/oss-review-toolkit/ort/branch/master/graph/badge.svg
